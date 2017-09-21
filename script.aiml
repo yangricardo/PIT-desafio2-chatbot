@@ -1,0 +1,1200 @@
+<?xml version="1.0" encoding="Latin-1"?>
+<aiml version="1.0.1">
+
+
+
+	<category>
+		<pattern>START</pattern>
+      <template>
+			<think><set name="topic">START</set></think>
+			<random>
+				<li>Olá, como posso ajudar?</li>
+				<li>Olá, em que posso ajudar?</li>
+			</random>
+	  </template>
+	</category>
+
+	
+<topic name = "START">
+    <category>
+        <pattern>*</pattern>
+            <template><random>
+                <li>Desculpe, não entendi.</li>
+                <li>Me desculpe, não estou entendendo. Permita-me ajudar:\n
+					- Se deseja registrar um acidente diga "acidente".\n
+				</li>
+            </random></template>
+    </category>
+</topic>	
+
+	
+	<category>
+		<pattern>ACIDENTE</pattern>
+		<template>			
+			Aqui estão alguns número de emergência que você pode usar:\n
+			
+			Polícia Militar - 190\n
+			Polícia Rodoviária Federal - 191\n
+			SAMU - 192\n
+			Corpo de Bombeiros - 193\n
+			Polícia Federal - 194\n
+			Polícia Civil -197\n
+			Polícia Rodoviária Estadual - 198\n
+			Defesa Civil - 199\n
+			LAMSA - +55 800 024 2355\n\n
+			
+			Ou você pode registrar um acidente.
+			#button#Registrar um acidente
+		</template>
+	</category>
+	
+	<category>
+		<pattern>SIM</pattern>
+		<that>DESEJA REGISTRAR UM ACIDENTE</that>
+		<template><srai>DECLARAR UM ACIDENTE</srai></template>
+	</category>
+	
+	<category>
+		<pattern>NÃO</pattern>
+		<that>DESEJA REGISTRAR UM ACIDENTE</that>
+		<template>
+
+		</template>
+	</category>
+	
+	<category>
+		<pattern>DESEJO</pattern>
+		<template><srai>DECLARAR UM ACIDENTE</srai></template>
+	</category>	
+	
+	<category> 
+		<pattern>DECLARAR UM ACIDENTE</pattern>
+		<template>
+			<think>
+				<set name = "nmortos">A definir</set>
+				<set name = "nferidos">A definir</set>
+				<set name = "tipo_acidente">A definir</set>
+				<set name = "empresa">A definir</set>
+				<set name = "tipo">A definir</set>
+				<set name = "estado">A definir</set>
+				<set name = "cidade">A definir</set>
+				<set name = "local">A definir</set>
+				<set name = "codigo">A definir</set>
+				<set name = "tipo_rodovia">A definir</set>
+				<set name = "km">A definir</set>
+				<set name = "pavimentada">A definir</set>
+				<set name = "sinalizacao">A definir</set>
+				<set name = "rota">A definir</set>
+				<set name = "condicoes">A definir</set>
+				<set name = "mao_dupla">A definir</set>
+				<set name = "extra">A definir</set>
+				
+
+				<set name = "topic">registro</set>
+			</think>
+			Ok, houveram mortos?
+			#button#Sim;Não;Não Sei
+		</template>
+	</category>
+	
+	<category>
+		<pattern>_ DECLARAR UM ACIDENTE</pattern> 
+		<template><srai>DECLARAR UM ACIDENTE</srai></template>
+	</category>
+	
+	<category>
+		<pattern>DECLARAR UM ACIDENTE _</pattern> 
+		<template><srai>DECLARAR UM ACIDENTE</srai></template>	
+	</category>	
+
+	<category>
+		<pattern>_ DECLARAR UM ACIDENTE _</pattern> 
+		<template><srai>DECLARAR UM ACIDENTE</srai></template>	
+	</category>
+	
+	<category> 
+		<pattern>REGISTRAR UM ACIDENTE</pattern> 
+		<template><srai>DECLARAR UM ACIDENTE</srai></template>
+	</category>
+	
+	<category>
+		<pattern>_ REGISTRAR UM ACIDENTE</pattern> 
+		<template><srai>DECLARAR UM ACIDENTE</srai></template>
+	</category>
+	
+	<category>
+		<pattern>REGISTRAR UM ACIDENTE _</pattern> 
+		<template><srai>DECLARAR UM ACIDENTE</srai></template>	
+	</category>	
+
+	<category>
+		<pattern>_ REGISTRAR UM ACIDENTE _</pattern> 
+		<template><srai>DECLARAR UM ACIDENTE</srai></template>	
+	</category>
+	
+	
+	<topic name = "REGISTRO">
+		
+		<category>
+			<pattern>SIM</pattern>
+			<that>OK HOUVERAM MORTOS _</that>
+			<template>Quantos?</template>
+		</category>
+		
+		<category>
+			<pattern>NÃO</pattern>
+			<that>OK HOUVERAM MORTOS _</that>
+			<template>
+				<think><set name = "nmortos">0</set></think>					
+				E quantos feridos?
+			</template>
+		</category>
+		
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>OK HOUVERAM MORTOS _</that>
+			<template>					
+				E quantos feridos?
+			</template>
+		</category>
+		
+		
+		<category>
+			<pattern>*</pattern>
+			<that>QUANTOS</that>
+			<template>
+				<think><set name = "nmortos"><star/></set></think>
+				E quantos feridos?
+			</template>
+		</category>
+
+		<category>
+			<pattern>NENHUM</pattern>
+			<that>E QUANTOS FERIDOS</that>
+			<template>
+				<think><set name = "nferidos">0</set></think>
+				Certo, e você pode descrever o tipo do acidente?
+				#button#Colisão traseira;Colisão frontal;Colisão lateral mesmo sentido;Colisão lateral sentido oposto;Atropelamento;Capotagem;Outro;
+			</template>
+		</category>
+		
+		<category>
+			<pattern>*</pattern>
+			<that>E QUANTOS FERIDOS</that>
+			<template>
+				<think><set name = "nferidos"><star/></set></think>
+				Certo, e você pode descrever o tipo do acidente?
+				#button#Colisão traseira;Colisão frontal;Colisão lateral mesmo sentido;Colisão lateral sentido oposto;Atropelamento;Capotagem;Outro;
+			</template>
+		</category>
+		
+		<category>
+			<pattern>NÃO</pattern>
+			<that>CERTO E VOCÊ PODE DESCREVER O TIPO DO ACIDENTE _</that>
+			<template>Ok, pode me dizer qual é a empresa do ônibus?</template>
+		</category>
+		
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>CERTO E VOCÊ PODE DESCREVER O TIPO DO ACIDENTE _</that>
+			<template><srai>NÃO</srai></template>
+		</category>
+		
+		<category>
+			<pattern>OUTRO</pattern>
+			<that>CERTO E VOCÊ PODE DESCREVER O TIPO DO ACIDENTE _</that>
+			<template>Como foi o acidente?</template>
+		</category>
+		
+		<category>
+			<pattern>*</pattern>
+			<that>CERTO E VOCÊ PODE DESCREVER O TIPO DO ACIDENTE _</that>
+			<template>
+				<think><set name = "tipo_acidente"><star/></set></think>
+				Ok, pode me dizer qual é a empresa do ônibus?
+			</template>
+		</category>
+		
+		<category>
+			<pattern>*</pattern>
+			<that>COMO FOI O ACIDENTE</that>
+			<template>
+				<think><set name = "tipo_acidente"><star/></set></think>
+				Ok, pode me dizer qual é a empresa do ônibus?
+			</template>
+		</category>
+				
+		<category>
+			<pattern>*</pattern>
+			<that>OK PODE ME DIZER QUAL É A EMPRESA DO ÔNIBUS</that>
+			<template>
+				<think><set name = "empresa"><star/></set></think>
+				Você sabe se era um ônibus de fretamento ou uma linha regular?
+				#button#Fretamento;Linha Regular
+			</template>
+		</category>
+		
+		
+		<category>
+			<pattern>FRETAMENTO</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR _</that>
+			<template>
+				<think>
+					<set name = "tipo">Fretamento</set>
+					<set name = "topic">location</set>
+				</think>
+				Certo, por favor me informe o estado no qual ocorreu o acidente, ou você pode me mandar sua localização.
+			</template>
+		</category>
+
+		<category>
+			<pattern>_ FRETAMENTO</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR _</that>
+			<template><srai>FRETAMENTO</srai></template>
+		</category>
+
+		<category>
+			<pattern>FRETAMENTO _</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR _</that>
+			<template><srai>FRETAMENTO</srai></template>
+		</category>
+
+		<category>
+			<pattern>_ FRETAMENTO _</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR _</that>
+			<template><srai>FRETAMENTO</srai></template>
+		</category>
+		
+		<category>
+			<pattern>FRETAMENTO</pattern>
+			<that>NÃO ENTENDI PODE REPETIR</that>
+			<template>
+				<think>
+					<set name = "tipo">Fretamento</set>
+					<set name = "topic">location</set>
+				</think>
+				Certo, por favor me informe o estado no qual ocorreu o acidente, ou você pode me mandar sua localização.
+			</template>
+		</category>
+		
+		<category>
+			<pattern>_ FRETAMENTO</pattern>
+			<that>NÃO ENTENDI PODE REPETIR</that>
+			<template><srai>FRETAMENTO</srai></template>
+		</category>
+
+		<category>
+			<pattern>FRETAMENTO _</pattern>
+			<that>NÃO ENTENDI PODE REPETIR</that>
+			<template><srai>FRETAMENTO</srai></template>
+		</category>
+
+		<category>
+			<pattern>_ FRETAMENTO _</pattern>
+			<that>NÃO ENTENDI PODE REPETIR</that>
+			<template><srai>FRETAMENTO</srai></template>
+		</category>
+
+		<category>
+			<pattern>LINHA REGULAR</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR _</that>
+			<template>
+				<think>
+					<set name = "tipo">Linha regular</set>
+					<set name = "topic">location</set>
+				</think>
+				Certo, por favor me informe o estado no qual ocorreu o acidente, ou você pode me mandar sua localização.
+			</template>
+		</category>
+		
+		<category>
+			<pattern>_ LINHA REGULAR</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>
+
+		<category>
+			<pattern>LINHA REGULAR _</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>
+
+		<category>
+			<pattern>_ LINHA REGULAR _</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>
+
+		<category>
+			<pattern>REGULAR</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>
+
+		<category>
+			<pattern>_ REGULAR</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>
+
+		<category>
+			<pattern>REGULAR _</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>
+
+		<category>
+			<pattern>_ REGULAR _</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>
+		
+		<category>
+			<pattern>LINHA REGULAR</pattern>
+			<that>NÃO ENTENDI PODE REPETIR</that>
+			<template>
+				<think>
+					<set name = "tipo">Linha regular</set>
+					<set name = "topic">location</set>
+				</think>
+				Certo, por favor me informe o estado no qual ocorreu o acidente, ou você pode me mandar sua localização.
+			</template>
+		</category>		
+
+		<category>
+			<pattern>_ LINHA REGULAR</pattern>
+			<that>NÃO ENTENDI PODE REPETIR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>
+
+		<category>
+			<pattern>LINHA REGULAR _</pattern>
+			<that>NÃO ENTENDI PODE REPETIR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>
+
+		<category>
+			<pattern>_ LINHA REGULAR _</pattern>
+			<that>NÃO ENTENDI PODE REPETIR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>
+
+		<category>
+			<pattern>_ REGULAR _</pattern>
+			<that>NÃO ENTENDI PODE REPETIR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>
+		
+		<category>
+			<pattern>_ REGULAR</pattern>
+			<that>NÃO ENTENDI PODE REPETIR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>		
+
+		<category>
+			<pattern>REGULAR _</pattern>
+			<that>NÃO ENTENDI PODE REPETIR</that>
+			<template><srai>LINHA REGULAR</srai></template>
+		</category>
+		
+		<category>
+			<pattern>*</pattern>
+			<that>VOCÊ SABE SE ERA UM ÔNIBUS DE FRETAMENTO OU UMA LINHA REGULAR _</that>
+			<template>Não entendi, pode repetir?</template>
+		</category>
+		
+		<category>
+			<pattern>*</pattern>
+			<that>NÃO ENTENDI PODE REPETIR</that>
+			<template>Não entendi, pode repetir?</template>
+		</category>
+		
+		<category>
+			<pattern>FOI EM *</pattern>
+			<that>E QUAL O NOME DA CIDADE</that>
+			<template>
+				<think>
+					<set name = "cidade"><star/></set>
+				</think>
+				Foi dentro da cidade ou em uma rodovia?
+				#button#Dentro da cidade;Rodovia
+			</template>
+		</category>	
+		
+		<category>
+			<pattern>*</pattern>
+			<that>E QUAL O NOME DA CIDADE</that>
+			<template><srai>FOI EM <star/></srai></template>
+		</category>
+	
+		<category>
+			<pattern>FOI NO *</pattern>
+			<that>E QUAL O NOME DA CIDADE</that>
+			<template><srai>FOI EM <star/></srai></template>
+		</category>
+		
+		<category>
+			<pattern>CIDADE</pattern>
+			<that>FOI DENTRO DA CIDADE OU EM UMA RODOVIA _</that>
+			<template><think><set name = "local">Cidade</set></think>
+				Ok, gostaria de falar sobre outros detalhes que ache importante? Senão podemos finalizar.
+				#button#Sim;Finalizar
+			</template>
+		</category>
+		
+		<category>
+			<pattern>_ CIDADE _</pattern>
+			<that>FOI DENTRO DA CIDADE OU EM UMA RODOVIA _</that>
+			<template><srai>CIDADE</srai></template>
+		</category>
+		
+		<category>
+			<pattern>_ CIDADE</pattern>
+			<that>FOI DENTRO DA CIDADE OU EM UMA RODOVIA _</that>
+			<template><srai>CIDADE</srai></template>
+		</category>
+		
+		<category>
+			<pattern>CIDADE _</pattern>
+			<that>FOI DENTRO DA CIDADE OU EM UMA RODOVIA _</that>
+			<template><srai>CIDADE</srai></template>
+		</category>
+	 
+	  	<category>
+			<pattern>RODOVIA</pattern>
+			<that>FOI DENTRO DA CIDADE OU EM UMA RODOVIA _</that>
+			<template>
+				<think>
+					<set name = "local">Rodovia</set>
+					<set name = "topic">rodovia</set>
+				</think>
+				Qual o nome / código da rodovia?
+			</template>
+		</category>
+	 
+	 	<category>
+			<pattern>_ RODOVIA _</pattern>
+			<that>FOI DENTRO DA CIDADE OU EM UMA RODOVIA _</that>
+			<template><srai>RODOVIA</srai></template>
+		</category>
+		
+		<category>
+			<pattern>_ RODOVIA</pattern>
+			<that>FOI DENTRO DA CIDADE OU EM UMA RODOVIA _</that>
+			<template><srai>RODOVIA</srai></template>
+		</category>
+		
+		<category>
+			<pattern>RODOVIA _</pattern>
+			<that>FOI DENTRO DA CIDADE OU EM UMA RODOVIA _</that>
+			<template><srai>RODOVIA</srai></template>
+		</category>
+		
+		<category>
+			<pattern>CIDADE</pattern>
+			<that>ACHO QUE EU NÃO ENTENDI PODERIA REPETIR</that>
+			<template><think><set name = "local">Cidade</set></think>
+				Ok, gostaria de falar sobre outros detalhes que ache importante? Senão podemos finalizar.
+				#button#Sim;Finalizar
+			</template>
+		</category>
+		
+		<category>
+			<pattern>_ CIDADE _</pattern>
+			<that>ACHO QUE EU NÃO ENTENDI PODERIA REPETIR</that>
+			<template><srai>CIDADE</srai></template>
+		</category>
+		
+		<category>
+			<pattern>_ CIDADE</pattern>
+			<that>ACHO QUE EU NÃO ENTENDI PODERIA REPETIR</that>
+			<template><srai>CIDADE</srai></template>
+		</category>
+		
+		<category>
+			<pattern>CIDADE _</pattern>
+			<that>ACHO QUE EU NÃO ENTENDI PODERIA REPETIR</that>
+			<template><srai>CIDADE</srai></template>
+		</category>
+	 
+	  	<category>
+			<pattern>RODOVIA</pattern>
+			<that>ACHO QUE EU NÃO ENTENDI PODERIA REPETIR</that>
+			<template>
+				<think>
+					<set name = "local">Rodovia</set>
+					<set name = "topic">rodovia</set>
+				</think>
+				Qual o nome / código da rodovia?
+			</template>
+		</category>
+	 
+	 	<category>
+			<pattern>_ RODOVIA _</pattern>
+			<that>ACHO QUE EU NÃO ENTENDI PODERIA REPETIR</that>
+			<template><srai>RODOVIA</srai></template>
+		</category>
+		
+		<category>
+			<pattern>_ RODOVIA</pattern>
+			<that>ACHO QUE EU NÃO ENTENDI PODERIA REPETIR</that>
+			<template><srai>RODOVIA</srai></template>
+		</category>
+		
+		<category>
+			<pattern>RODOVIA _</pattern>
+			<that>ACHO QUE EU NÃO ENTENDI PODERIA REPETIR</that>
+			<template><srai>RODOVIA</srai></template>
+		</category>		
+		
+		<category>
+			<pattern>*</pattern>
+			<that>FOI DENTRO DA CIDADE OU EM UMA RODOVIA</that>
+			<template>Acho que eu não entendi, poderia repetir?</template>
+		</category>
+			
+		<category>
+			<pattern>*</pattern>
+			<that>ACHO QUE EU NÃO ENTENDI PODERIA REPETIR</that>
+			<template>Acho que eu não entendi, poderia repetir?</template>
+		</category>
+	
+	</topic>
+ 
+ 	<topic name = "LOCATION">
+ 		<category>
+ 			<pattern>LOCATION</pattern>
+ 			<template>
+ 				<think><set name = "topic">rodovia</set></think>
+ 				A rua estava pavimentada?
+ 				#button#Sim;Não;Não Sei
+ 			</template>
+ 		</category>
+ 		
+ 		<category>
+			<pattern>FOI EM *</pattern>
+			<that>CERTO POR FAVOR ME INFORME O ESTADO NO QUAL OCORREU O ACIDENTE OU VOCÊ PODE ME MANDAR SUA LOCALIZAÇÃO</that>
+			<template>
+				<think>
+					<set name = "estado"><star/></set>
+					<set name = "topic">registro</set>
+				</think>
+				E qual o nome da cidade?
+			</template>
+		</category>	
+		
+		<category>
+			<pattern>*</pattern>
+			<that>CERTO POR FAVOR ME INFORME O ESTADO NO QUAL OCORREU O ACIDENTE OU VOCÊ PODE ME MANDAR SUA LOCALIZAÇÃO</that>
+			<template><srai>FOI EM <star/></srai></template>
+		</category>
+	
+		<category>
+			<pattern>FOI NO *</pattern>
+			<that>CERTO POR FAVOR ME INFORME O ESTADO NO QUAL OCORREU O ACIDENTE OU VOCÊ PODE ME MANDAR SUA LOCALIZAÇÃO</that>
+			<template><srai>FOI EM <star/></srai></template>
+		</category>
+ 		
+ 	</topic>
+ 
+	<topic name = "RODOVIA">
+	
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>QUAL O NOME CÓDIGO DA RODOVIA</that>
+			<template>
+				A rodovia é estadual ou federal?
+				#button#Estadual;Federal
+			</template>
+		</category>
+		
+		<category>
+			<pattern>_ NÃO SEI</pattern>
+			<that>QUAL O NOME CÓDIGO DA RODOVIA</that>
+			<template><srai>NÃO SEI</srai></template>
+		</category>
+		
+		<category>
+			<pattern>*</pattern>
+			<that>QUAL O NOME CÓDIGO DA RODOVIA</that>
+			<template>
+				<think><set name = "codigo"><star/></set></think>
+				Certo, e qual foi o Km da rodovia onde ocorreu o acidente?
+			</template>
+		</category>
+	
+		<category>
+			<pattern>ESTADUAL</pattern>
+			<that>A RODOVIA É ESTADUAL OU FEDERAL _</that>
+			<template>
+				<think><set name = "tipo_rodovia">Estadual</set></think>
+				Certo, e qual foi o Km da rodovia onde ocorreu o acidente?
+			</template>
+		</category>
+
+		<category>
+			<pattern>_ ESTADUAL</pattern>
+			<that>A RODOVIA É ESTADUAL OU FEDERAL _</that>
+			<template><srai>ESTADUAL</srai></template>
+		</category>		
+
+		<category>
+			<pattern>ESTADUAL _</pattern>
+			<that>A RODOVIA É ESTADUAL OU FEDERAL _</that>
+			<template><srai>ESTADUAL</srai></template>
+		</category>
+		
+		<category>
+			<pattern>_ ESTADUAL _</pattern>
+			<that>A RODOVIA É ESTADUAL OU FEDERAL _</that>
+			<template><srai>ESTADUAL</srai></template>
+		</category>		
+		
+		<category>
+			<pattern>FEDERAL</pattern>
+			<that>A RODOVIA É ESTADUAL OU FEDERAL _</that>
+			<template>
+				<think><set name = "tipo_rodovia">Federal</set></think>
+				Certo, e qual foi o Km da rodovia onde ocorreu o acidente?
+			</template>
+		</category>
+
+		<category>
+			<pattern>_ FEDERAL</pattern>
+			<that>A RODOVIA É ESTADUAL OU FEDERAL _</that>
+			<template><srai>FEDERAL</srai></template>
+		</category>		
+
+		<category>
+			<pattern>FEDERAL _</pattern>
+			<that>A RODOVIA É ESTADUAL OU FEDERAL _</that>
+			<template><srai>FEDERAL</srai></template>
+		</category>
+		
+		<category>
+			<pattern>_ FEDERAL _</pattern>
+			<that>A RODOVIA É ESTADUAL OU FEDERAL _</that>
+			<template><srai>FEDERAL</srai></template>
+		</category>					
+		
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>A RODOVIA É ESTADUAL OU FEDERAL _</that>
+			<template>
+				Certo, e qual foi o Km da rodovia onde ocorreu o acidente?
+			</template>
+		</category>
+		
+		<category>
+			<pattern> _ NÃO SEI</pattern>
+			<that>A RODOVIA É ESTADUAL OU FEDERAL _</that>
+			<template><srai>NÃO SEI</srai></template>
+		</category>				
+		
+		<category>
+			<pattern>ESTADUAL</pattern>
+			<that>NÃO ESTOU ENTENDENDO</that>
+			<template>
+				<think><set name = "tipo_rodovia">Estadual</set></think>
+				Certo, e qual foi o Km da rodovia onde ocorreu o acidente?
+			</template>
+		</category>
+
+		<category>
+			<pattern>_ ESTADUAL</pattern>
+			<that>NÃO ESTOU ENTENDENDO</that>
+			<template><srai>ESTADUAL</srai></template>
+		</category>		
+
+		<category>
+			<pattern>ESTADUAL _</pattern>
+			<that>NÃO ESTOU ENTENDENDO</that>
+			<template><srai>ESTADUAL</srai></template>
+		</category>
+		
+		<category>
+			<pattern>_ ESTADUAL _</pattern>
+			<that>NÃO ESTOU ENTENDENDO</that>
+			<template><srai>ESTADUAL</srai></template>
+		</category>		
+		
+		<category>
+			<pattern>FEDERAL</pattern>
+			<that>NÃO ESTOU ENTENDENDO</that>
+			<template>
+				<think><set name = "tipo_rodovia">Federal</set></think>
+				Certo, e qual foi o Km da rodovia onde ocorreu o acidente?
+			</template>
+		</category>
+
+		<category>
+			<pattern>_ FEDERAL</pattern>
+			<that>NÃO ESTOU ENTENDENDO</that>
+			<template><srai>FEDERAL</srai></template>
+		</category>		
+
+		<category>
+			<pattern>FEDERAL _</pattern>
+			<that>NÃO ESTOU ENTENDENDO</that>
+			<template><srai>FEDERAL</srai></template>
+		</category>
+		
+		<category>
+			<pattern>_ FEDERAL _</pattern>
+			<that>NÃO ESTOU ENTENDENDO</that>
+			<template><srai>FEDERAL</srai></template>
+		</category>					
+		
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>NÃO ESTOU ENTENDENDO</that>
+			<template>
+				Certo, e qual foi o Km da rodovia onde ocorreu o acidente?
+			</template>
+		</category>
+		
+		<category>
+			<pattern> _ NÃO SEI</pattern>
+			<that>NÃO ESTOU ENTENDENDO</that>
+			<template><srai>NÃO SEI</srai></template>
+		</category>			
+		
+		<category>
+			<pattern>*</pattern>
+			<that>A RODOVIA É ESTADUAL OU FEDERAL _</that>
+			<template>Não estou entendendo</template>
+		</category>
+			
+		<category>
+			<pattern>*</pattern>
+			<that>NÃO ESTOU ENTENDENDO</that>
+			<template>Não estou entendendo</template>
+		</category>
+		
+		<category>
+			<pattern>*</pattern>
+			<that>CERTO E QUAL FOI O KM DA RODOVIA ONDE OCORREU O ACIDENTE</that>
+			<template>
+				<think><set name = "km"><star/></set></think>
+				Ela estava pavimentada?
+				#button#Sim;Não;Não Sei
+			</template>
+		</category>
+		
+		<category>
+			<pattern>KM *</pattern>
+			<that>CERTO E QUAL FOI O KM DA RODOVIA ONDE OCORREU O ACIDENTE</that>
+			<template><srai><star/></srai></template>
+		</category>				
+		
+		<category>
+			<pattern>FOI NO KM *</pattern>
+			<that>CERTO E QUAL FOI O KM DA RODOVIA ONDE OCORREU O ACIDENTE</that>
+			<template><srai><star/></srai></template>
+		</category>
+		
+		<category>
+			<pattern>SIM</pattern>
+			<that>ELA ESTAVA PAVIMENTADA _</that>
+			<template>
+				<think>
+					<set name = "pavimentada">Sim</set>
+					<set name = "rota">Normal</set>
+				</think>
+				Certo, e quais eram as condições da pista? Haviam buracos, estava molhada, etc?
+			</template>
+		</category>
+		
+		<category>
+			<pattern>NÃO</pattern>
+			<that>ELA ESTAVA PAVIMENTADA _</that>
+			<template>
+				<think><set name = "pavimentada">Não</set></think>
+				o ônibus pegou alguma rota alternativa?
+				#button#Sim;Não;Não Sei
+			</template>
+		</category>
+
+		<category>
+			<pattern>SIM</pattern>
+			<that>PODE REPETIR</that>
+			<template>
+				<think>
+					<set name = "pavimentada">Sim</set>
+					<set name = "rota">Normal</set>
+				</think>
+				Certo, e quais eram as condições da pista? Haviam buracos, estava molhada, etc?
+			</template>
+		</category>
+		
+		<category>
+			<pattern>NÃO</pattern>
+			<that>PODE REPETIR</that>
+			<template>
+				<think><set name = "pavimentada">Não</set></think>
+				o ônibus pegou alguma rota alternativa?
+				#button#Sim;Não;Não Sei
+			</template>
+		</category>
+
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>ELA ESTAVA PAVIMENTADA _</that>
+			<template>
+				o ônibus pegou alguma rota alternativa?
+				#button#Sim;Não;Não Sei
+			</template>
+		</category>
+
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>PODE REPETIR</that>
+			<template>
+				o ônibus pegou alguma rota alternativa?
+				#button#Sim;Não;Não Sei
+			</template>
+		</category>
+
+		<category>
+			<pattern>*</pattern>
+			<that>ELA ESTAVA PAVIMENTADA _</that>
+			<template>Pode repetir?</template>
+		</category>
+		
+		<category>
+			<pattern>SIM</pattern>
+			<that>A RUA ESTAVA PAVIMENTADA _</that>
+			<template>
+				<think><set name = "pavimentada">Sim</set></think>
+				o ônibus pegou alguma rota alternativa?
+				#button#Sim;Não;Não Sei
+			</template>
+		</category>
+		
+		<category>
+			<pattern>NÃO</pattern>
+			<that>A RUA ESTAVA PAVIMENTADA _</that>
+			<template>
+				<think><set name = "pavimentada">Não</set></think>
+				o ônibus pegou alguma rota alternativa?
+				#button#Sim;Não;Não Sei
+			</template>
+		</category>
+
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>A RUA ESTAVA PAVIMENTADA _</that>
+			<template>
+				o ônibus pegou alguma rota alternativa?
+				#button#Sim;Não;Não Sei
+			</template>
+		</category>
+
+		<category>
+			<pattern>*</pattern>
+			<that>A RUA ESTAVA PAVIMENTADA _</that>
+			<template>Pode repetir?</template>
+		</category>
+		
+		<category>
+			<pattern>*</pattern>
+			<that>PODE REPETIR</that>
+			<template>Pode repetir?</template>
+		</category>
+			
+		<category>
+			<pattern>SIM</pattern>
+			<that>O ÔNIBUS PEGOU ALGUMA ROTA ALTERNATIVA _</that>
+			<template>
+				<think><set name = "rota">Desvio</set></think>
+				Certo, e quais eram as condições da pista? Haviam buracos, estava molhada, etc?
+			</template>
+		</category>		
+		
+		<category>
+			<pattern>NÃO</pattern>
+			<that>O ÔNIBUS PEGOU ALGUMA ROTA ALTERNATIVA _</that>
+			<template>
+				<think><set name = "rota">Normal</set></think>
+				Certo, e quais eram as condições da pista? Haviam buracos, estava molhada, etc?
+			</template>
+		</category>		
+		
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>O ÔNIBUS PEGOU ALGUMA ROTA ALTERNATIVA _</that>
+			<template>
+				Certo, e quais eram as condições da pista? Haviam buracos, estava molhada, etc?
+			</template>
+		</category>
+		
+		<category>
+			<pattern>_ NÃO SEI</pattern>
+			<that>O ÔNIBUS PEGOU ALGUMA ROTA ALTERNATIVA _</that>
+			<template><srai>NÃO SEI</srai></template>
+		</category>
+
+		<category>
+			<pattern>SIM</pattern>
+			<that>COMO ASSIM</that>
+			<template>
+				<think><set name = "rota">Desvio</set></think>
+				Certo, e quais eram as condições da pista? Haviam buracos, estava molhada, etc?
+			</template>
+		</category>		
+		
+		<category>
+			<pattern>NÃO</pattern>
+			<that>COMO ASSIM</that>
+			<template>
+				<think><set name = "rota">Normal</set></think>
+				Certo, e quais eram as condições da pista? Haviam buracos, estava molhada, etc?
+			</template>
+		</category>		
+		
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>COMO ASSIM</that>
+			<template>
+				Certo, e quais eram as condições da pista? Haviam buracos, estava molhada, etc?
+			</template>
+		</category>
+
+		<category>
+			<pattern>_ NÃO SEI</pattern>
+			<that>COMO ASSIM</that>
+			<template><srai>NÃO SEI</srai></template>
+		</category>
+		
+		<category>
+			<pattern>*</pattern>
+			<that>COMO ASSIM</that>
+			<template>Como assim?</template>
+		</category>
+			
+		<category>
+			<pattern>*</pattern>
+			<that>COMO ASSIM</that>
+			<template>Como assim?</template>
+		</category>							
+
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>CERTO E QUAIS ERAM AS CONDIÇÕES DA PISTA HAVIAM BURACOS ESTAVA MOLHADA ETC</that>
+			<template>
+				E como estava a sinalização? Haviam placas e faixas, etc.
+			</template>
+		</category>
+
+		<category>
+			<pattern>_ NÃO SEI</pattern>
+			<that>CERTO E QUAIS ERAM AS CONDIÇÕES DA PISTA HAVIAM BURACOS ESTAVA MOLHADA ETC</that>
+			<template><srai>NÃO SEI</srai></template>
+		</category>
+		
+		<category>
+			<pattern>*</pattern>
+			<that>CERTO E QUAIS ERAM AS CONDIÇÕES DA PISTA HAVIAM BURACOS ESTAVA MOLHADA ETC</that>
+			<template>
+				<think><set name = "condicoes"><star/></set></think>
+				E como estava a sinalização? Haviam placas e faixas, etc.
+			</template>
+		</category>
+
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>E COMO ESTAVA A SINALIZAÇÃO HAVIAM PLACAS E FAIXAS ETC</that>
+			<template>
+				A rodovia é de mão dupla?
+				#button#Sim;Não;Não Sei
+			</template>
+		</category>
+
+		<category>
+			<pattern>_ NÃO SEI</pattern>
+			<that>E COMO ESTAVA A SINALIZAÇÃO HAVIAM PLACAS E FAIXAS ETC</that>
+			<template><srai>NÃO SEI</srai></template>
+		</category>
+
+		<category>
+			<pattern>*</pattern>
+			<that>E COMO ESTAVA A SINALIZAÇÃO HAVIAM PLACAS E FAIXAS ETC</that>
+			<template>
+				<think><set name = "sinalizacao"><star/></set></think>
+				A rodovia é de mão dupla?
+				#button#Sim;Não;Não Sei
+			</template>
+		</category>
+
+		<category>
+			<pattern>SIM</pattern>
+			<that>A RODOVIA É DE MÃO DUPLA _</that>
+			<template>
+				<think><set name = "mao_dupla">Sim</set></think>
+				Ok, gostaria de falar sobre outros detalhes que ache importante? Senão podemos finalizar.
+				#button#Sim;Finalizar
+			</template>
+		</category>		
+
+		<category>
+			<pattern>NÃO</pattern>
+			<that>A RODOVIA É DE MÃO DUPLA _</that>
+			<template>
+				<think><set name = "mao_dupla">Não</set></think>
+				Ok, gostaria de falar sobre outros detalhes que ache importante? Senão podemos finalizar.
+				#button#Sim;Finalizar
+			</template>
+		</category>
+
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>A RODOVIA É DE MÃO DUPLA _</that>
+			<template>
+				Ok, gostaria de falar sobre outros detalhes que ache importante? Senão podemos finalizar.
+				#button#Sim;Finalizar
+			</template>
+		</category>
+		
+		<category>
+			<pattern>SIM</pattern>
+			<that>NÃO TE ENTENDI</that>
+			<template>
+				<think><set name = "mao_dupla">Sim</set></think>
+				Ok, gostaria de falar sobre outros detalhes que ache importante? Senão podemos finalizar.
+				#button#Sim;Finalizar
+			</template>
+		</category>		
+
+		<category>
+			<pattern>NÃO</pattern>
+			<that>NÃO TE ENTENDI</that>
+			<template>
+				<think><set name = "mao_dupla">Não</set></think>
+				Ok, gostaria de falar sobre outros detalhes que ache importante? Senão podemos finalizar.
+				#button#Sim;Finalizar
+			</template>
+		</category>
+
+		<category>
+			<pattern>NÃO SEI</pattern>
+			<that>NÃO TE ENTENDI</that>
+			<template>
+				Ok, gostaria de falar sobre outros detalhes que ache importante? Senão podemos finalizar.
+				#button#Sim;Finalizar
+			</template>
+		</category>
+
+		<category>
+			<pattern>*</pattern>
+			<that>A RODOVIA É DE MÃO DUPLA _</that>
+			<template>Não te entendi</template>
+		</category>
+		
+		<category>
+			<pattern>*</pattern>
+			<that>NÃO TE ENTENDI</that>
+			<template>Não te entendi</template>
+		</category>				
+
+	</topic>
+
+	<category>
+		<pattern>FINALIZAR</pattern>
+		<that>OK GOSTARIA DE FALAR SOBRE OUTROS DETALHES QUE ACHE IMPORTANTE SENÃO PODEMOS FINALIZAR _</that>
+		<template>
+			<think><set name = "topic">fim</set></think>
+			O acidente foi registrado com suceso!
+		</template>
+	</category>
+	
+	<category>
+		<pattern>_ FINALIZAR</pattern>
+		<that>OK GOSTARIA DE FALAR SOBRE OUTROS DETALHES QUE ACHE IMPORTANTE SENÃO PODEMOS FINALIZAR _</that>
+		<template><srai>FINALIZAR</srai></template>
+	</category>
+
+	<category>
+		<pattern>FINALIZAR _</pattern>
+		<that>OK GOSTARIA DE FALAR SOBRE OUTROS DETALHES QUE ACHE IMPORTANTE SENÃO PODEMOS FINALIZAR _</that>
+		<template><srai>FINALIZAR</srai></template>
+	</category>
+
+	<category>
+		<pattern>_ FINALIZAR _</pattern>
+		<that>OK GOSTARIA DE FALAR SOBRE OUTROS DETALHES QUE ACHE IMPORTANTE SENÃO PODEMOS FINALIZAR _</that>
+		<template><srai>FINALIZAR</srai></template>
+	</category>
+
+	<category>
+		<pattern>NÃO</pattern>
+		<that>OK GOSTARIA DE FALAR SOBRE OUTROS DETALHES QUE ACHE IMPORTANTE SENÃO PODEMOS FINALIZAR _</that>
+		<template><srai>FINALIZAR</srai></template>
+	</category>
+	
+	<category>
+		<pattern>SIM</pattern>
+		<that>OK GOSTARIA DE FALAR SOBRE OUTROS DETALHES QUE ACHE IMPORTANTE SENÃO PODEMOS FINALIZAR _</that>
+		<template>
+			Certo, o que você gostaria de deixar registrado?
+		</template>
+	</category>
+
+	<category>
+		<pattern>SIM _</pattern>
+		<that>OK GOSTARIA DE FALAR SOBRE OUTROS DETALHER QUE ACHE IMPORTANTE SENÃO PODEMOS FINALIZAR _</that>
+		<template>
+			Certo, o que você gostaria de deixar registrado?
+		</template>
+	</category>
+
+	<category>
+		<pattern>*</pattern>
+		<that>CERTO O QUE VOCÊ GOSTARIA DE DEIXAR REGISTRADO</that>
+		<template>
+			<think>
+				<set name = "extra"><star/></set>
+				<set name = "topic">fim</set>
+			</think>
+			Ok, o acidente foi registrado com sucesso!
+		</template>
+	</category>
+
+
+	<topic name = "FIM">
+	
+	 	<category>
+			<pattern>MOSTRAR DADOS</pattern>
+			<template>
+				Número de mortos - <get name = "nmortos"/>\n
+				Número de feridos - <get name = "nferidos"/>\n
+				Tipo do acidente - <get name = "tipo_acidente"/>\n
+				Empresa do ônibus - <get name = "empresa"/>\n
+				Tipo do ônibus - <get name = "tipo"/>\n
+				Estado - <get name = "estado"/>\n
+				Cidade - <get name = "cidade"/>\n
+				Local - <get name = "local"/>\n
+				Código da Rodovia - <get name = "codigo"/>\n
+				Tipo da Rodovia - <get name = "tipo_rodovia"/>\n
+				Km - <get name = "km"/>\n
+				Pavimentada - <get name = "pavimentada"/>\n
+				Sinalização - <get name = "sinalizacao"/>\n
+				Rota - <get name = "rota"/>\n
+				Condições - <get name = "condicoes"/>\n
+				Mão dupla - <get name = "mao_dupla"/>\n
+				Extra - <get name = "extra"/>
+			</template>
+		</category>
+	
+	</topic>
+	
+
+    <category>
+        <pattern>*</pattern>
+            <template><random>
+                <li>Me desculpe, não estou entendendo.</li>
+                <li>Poderia ser mais claro?</li>
+                <li>Desculpe, pode repetir por favor?</li>
+            </random></template>
+    </category>
+
+</aiml>
