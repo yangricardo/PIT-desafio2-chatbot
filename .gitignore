@@ -56,3 +56,9 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# idea files
+.idea/
+
+# Mac OS files
+.DS_Store
