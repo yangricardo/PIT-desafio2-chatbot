@@ -1,6 +1,6 @@
-'''
+"""
 Some general-purpose constants, including Python3/Python2 discrimination
-'''
+"""
 import sys
 
 # Package version
