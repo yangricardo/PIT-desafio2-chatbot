@@ -9,8 +9,8 @@ class aimlManager():
 
     def __init__(self):
         self.kernel = aiml.Kernel()
-        self.kernel.learn("script.aiml")
-        print(self.kernel.respond("START"))
+        self.kernel.learn("script_consumidor.aiml")
+        print(self.kernel.respond("INICIO"))
 
     def mensagem(self, text):
         return self.kernel.respond(text)
