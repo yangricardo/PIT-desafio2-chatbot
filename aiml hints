@@ -1,0 +1,19 @@
+<!-- topic: define contexto para regras de conhecimento [OPCIONAL]
+            Para determinar o tópico, é preciso usar <set name = “topic”>tópico</set>-->
+        <!-- <category>:define regras de conhecimento [OBRIGATORIO]-->
+            <!-- <pattern>:mensagem recebida [OBRIGATORIO]-->
+            <!-- <that>:define comportamento do bot baseado na ultima resposta [OPCIONAL]-->
+            <!-- <template>:respostas possíveis [OBRIGATORIO]-->
+                <!-- <random>:respostas aleatórias possíveis [OPCIONAL]-->
+                    <!-- <li>:respostas possíveis [OBRIGATORIO PARA RANDOM]-->
+                <!-- dentro do template-->
+                    <!-- <star index = “N”/>:
+                        captura a N-ésima parte da resposta do usuário demarcada por '*'[OPCIONAL]-->
+                    <!-- <srai>:
+                        define sinonimos para pattern definido anteriormente[OPCIONAL]-->
+                    <!-- <set name = “nome da variável”><star/></set>:
+                        define valor de variavel cujo nome é definido em name[OPCIONAL]-->
+                    <!-- <get name = “nome da variável”/>:
+                        acessa valor de variável definida em set[OPCIONAL]-->
+                    <!-- <think><set name = “filme”><star/></set> </think>:
+                        registra valor e omite na resposta do bot[OPCIONAL]-->
