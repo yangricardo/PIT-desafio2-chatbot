@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0.1">
+
+    <category>
+		<pattern>INICIO</pattern>
+        <template>
+            <think><set name="topic">INICIO</set></think>
+            Olá, eu sou um agente da Defensoria Pública do Estado do Rio de Janeiro, \r
+            você deseja iniciar um processo em função de uma cobrança indevida por \r
+            parte da Cedae?
+            #button#Sim;Não;
+        </template>
+	</category>
+
+	<topic name = "INICIO">
+		<category>
+			<pattern>*</pattern>
+			<template>
+				Desculpe, não entendi! Diga "Iniciar Processo" ou "Não".
+			</template>
+		</category>
+
+        <category>
+            <pattern>NÃO</pattern>
+            <template>DESCULPE, NO MOMENTO NÃO POSSO TE AJUDAR.</template>
+        </category>
+
+        <category>
+            <pattern>SIM</pattern>
+            <template>
+                <think><set name="topic">RENDA</set></think>
+                <srai>INICIAR PROCESSO</srai>
+            </template>
+        </category>
+	</topic>
+
+    <topic name="RENDA">
+        <category>
+            <pattern>INICIAR PROCESSO</pattern>
+            <template>
+                A sua renda mensal é até R$2.000,00?
+            </template>
+        </category>
+
+        <category>
+            <pattern>SIM</pattern>
+            <template>
+                <think><set name="topic">HASCOMPROVANTE</set></think>
+                <srai>HASCOMPROVANTE</srai>
+            </template>
+        </category>
+
+        <category>
+            <pattern>NÃO</pattern>
+            <template>
+                <think><set name="topic">HIPOSSUFICIENCIA</set></think>
+                <srai>HIPOSSUFICIENCIA</srai>
+            </template>
+        </category>
+
+        <category>
+            <pattern>*</pattern>
+            <template>
+                <random>
+                    <li>Desculpe, não entendi.</li>
+                    <li>
+                        DIGITE REINICIAR PROCESSO
+                    </li>
+                </random>
+            </template>
+        </category>
+
+        <category>
+            <pattern>DIGITE REINICIAR PROCESSO</pattern>
+            <template><srai>REINICIAR PROCESSO</srai></template>
+        </category>
+        <category>
+            <pattern>REINICIAR PROCESSO</pattern>
+            <that>DIGITE REINICIAR PROCESSO</that>
+            <template>
+                <think><set name="topic">RENDA</set></think>
+                <srai>INICIAR PROCESSO</srai>
+            </template>
+        </category>
+    </topic>
+
+    <topic name="HASCOMPROVANTE">
+        <category>
+            <pattern>HASCOMPROVANTE</pattern>
+            <template>
+                Você poderia enviar  algum documento que comprove essa afirmação? \n
+                Esse documento pode ser um contra cheque,  conta de luz, água, telefone, etc.
+            </template>
+        </category>
+
+        <category>
+            <pattern>SIM</pattern>
+            <template>
+                <think><set name="topic">COBRANCAINDEVIDA</set></think>
+                <srai>COBRANCAINDEVIDA</srai>
+            </template>
+        </category>
+
+        <category>
+            <pattern>NÃO</pattern>
+            <template>
+                Sinto muito, não podemos ajudá-lo. Procure a assistência de um advogado.
+            </template>
+        </category>
+
+                <category>
+            <pattern>*</pattern>
+            <template>
+                <random>
+                    <li>Desculpe, não entendi.</li>
+                    <li>
+                        DIGITE REINICIAR PROCESSO
+                    </li>
+                </random>
+            </template>
+        </category>
+
+        <category>
+            <pattern>DIGITE REINICIAR PROCESSO</pattern>
+            <template><srai>REINICIAR PROCESSO</srai></template>
+        </category>
+        <category>
+            <pattern>REINICIAR PROCESSO</pattern>
+            <that>DIGITE REINICIAR PROCESSO</that>
+            <template>
+                <think><set name="topic">RENDA</set></think>
+                <srai>INICIAR PROCESSO</srai>
+            </template>
+        </category>
+    </topic>
+
+     <topic name="HIPOSSUFICIENCIA">
+        <category>
+            <pattern>HIPOSSUFICIENCIA</pattern>
+            <template>
+                Você tem outras formas de comprovar a sua hipossuficiência?
+            </template>
+        </category>
+
+        <category>
+            <pattern>NÃO</pattern>
+            <template>
+                Sinto muito, não podemos ajudá-lo. Procure a assistência de um advogado.
+            </template>
+        </category>
+
+        <category>
+            <pattern>TALVEZ</pattern>
+            <template>
+                <srai>SIM</srai>
+            </template>
+        </category>
+
+        <category>
+            <pattern>NÃO SEI</pattern>
+            <template>
+                <srai>SIM</srai>
+            </template>
+        </category>
+
+        <category>
+            <pattern>SIM</pattern>
+            <template>
+                Se você tiver outras formas de comprovar a sua hipossuficiência, procure \r
+                um núcleo de atendimento da Defensoria Pública mais próximo de você. \r
+                Clique no link abaixo para acessar os locais dos núcleos: \r
+                http://www.defensoria.rj.def.br/Cidadao/Enderecos-para-Atendimento
+            </template>
+        </category>
+
+                 <category>
+            <pattern>*</pattern>
+            <template>
+                <random>
+                    <li>Desculpe, não entendi.</li>
+                    <li>
+                        DIGITE REINICIAR PROCESSO
+                    </li>
+                </random>
+            </template>
+        </category>
+
+        <category>
+            <pattern>DIGITE REINICIAR PROCESSO</pattern>
+            <template><srai>REINICIAR PROCESSO</srai></template>
+        </category>
+        <category>
+            <pattern>REINICIAR PROCESSO</pattern>
+            <that>DIGITE REINICIAR PROCESSO</that>
+            <template>
+                <think><set name="topic">RENDA</set></think>
+                <srai>INICIAR PROCESSO</srai>
+            </template>
+        </category>
+    </topic>
+
+     <topic name="COBRANCAINDEVIDA">
+         <category>
+            <pattern>COBRANCAINDEVIDA</pattern>
+            <template>
+                Você possui acesso às contas relativas a cobrança indevida?
+            </template>
+        </category>
+
+         <category>
+            <pattern>SIM</pattern>
+            <template>
+                <think><set name="topic">COMPROVANTE</set></think>
+                <srai>COMPROVANTE</srai>
+            </template>
+        </category>
+
+         <category>
+            <pattern>SIM</pattern>
+            <template>
+                <think><set name="topic">COMPROVANTE</set></think>
+                <srai>COMPROVANTE</srai>
+            </template>
+        </category>
+
+                 <category>
+            <pattern>*</pattern>
+            <template>
+                <random>
+                    <li>Desculpe, não entendi.</li>
+                    <li>
+                        DIGITE REINICIAR PROCESSO
+                    </li>
+                </random>
+            </template>
+        </category>
+
+        <category>
+            <pattern>DIGITE REINICIAR PROCESSO</pattern>
+            <template><srai>REINICIAR PROCESSO</srai></template>
+        </category>
+        <category>
+            <pattern>REINICIAR PROCESSO</pattern>
+            <that>DIGITE REINICIAR PROCESSO</that>
+            <template>
+                <think><set name="topic">RENDA</set></think>
+                <srai>INICIAR PROCESSO</srai>
+            </template>
+        </category>
+     </topic>
+
+    <topic name="COMPROVANTE">
+         <category>
+            <pattern>COMPROVANTE</pattern>
+            <template>
+                Você possui comprovante desse pagamento?
+            </template>
+        </category>
+
+         <category>
+            <pattern>NÃO</pattern>
+            <template>
+                <think><set name="topic">ALEGAR</set></think>
+                <srai>ALEGAR</srai>
+            </template>
+        </category>
+
+         <category>
+            <pattern>SIM</pattern>
+            <template>
+                <think><set name="topic">ENCAMINHAR</set></think>
+                <srai>ENCAMINHAR</srai>
+            </template>
+        </category>
+
+                <category>
+            <pattern>*</pattern>
+            <template>
+                <random>
+                    <li>Desculpe, não entendi.</li>
+                    <li>
+                        DIGITE REINICIAR PROCESSO
+                    </li>
+                </random>
+            </template>
+        </category>
+
+        <category>
+            <pattern>DIGITE REINICIAR PROCESSO</pattern>
+            <template><srai>REINICIAR PROCESSO</srai></template>
+        </category>
+        <category>
+            <pattern>REINICIAR PROCESSO</pattern>
+            <that>DIGITE REINICIAR PROCESSO</that>
+            <template>
+                <think><set name="topic">RENDA</set></think>
+                <srai>INICIAR PROCESSO</srai>
+            </template>
+        </category>
+     </topic>
+
+     <topic name="ALEGAR">
+         <category>
+            <pattern>ALEGAR</pattern>
+            <template>
+               Você possui outra forma de comprovar o que alega?
+            </template>
+        </category>
+
+         <category>
+            <pattern>NÃO</pattern>
+            <template>
+                Sinto muito, não podemos ajudá-lo. Procure a assistência de um advogado.
+            </template>
+        </category>
+
+         <category>
+            <pattern>SIM</pattern>
+            <template>
+                <think><set name="topic">ENCAMINHAR</set></think>
+                <srai>ENCAMINHAR</srai>
+            </template>
+        </category>
+
+                 <category>
+            <pattern>*</pattern>
+            <template>
+                <random>
+                    <li>Desculpe, não entendi.</li>
+                    <li>
+                        DIGITE REINICIAR PROCESSO
+                    </li>
+                </random>
+            </template>
+        </category>
+
+        <category>
+            <pattern>DIGITE REINICIAR PROCESSO</pattern>
+            <template><srai>REINICIAR PROCESSO</srai></template>
+        </category>
+        <category>
+            <pattern>REINICIAR PROCESSO</pattern>
+            <that>DIGITE REINICIAR PROCESSO</that>
+            <template>
+                <think><set name="topic">RENDA</set></think>
+                <srai>INICIAR PROCESSO</srai>
+            </template>
+        </category>
+     </topic>
+
+    <topic name="ENCAMINHAR">
+         <category>
+            <pattern>ENCAMINHAR</pattern>
+            <template>
+                Encaminhe o documento para o email da defensoria pública abaixo:
+                #button#Enviar
+            </template>
+        </category>
+
+         <category>
+            <pattern>ENVIAR</pattern>
+            <template>
+                Compareça a um Núcleo para iniciar o seu Processo
+            </template>
+        </category>
+
+                <category>
+            <pattern>*</pattern>
+            <template>
+                <random>
+                    <li>Desculpe, não entendi.</li>
+                    <li>
+                        DIGITE REINICIAR PROCESSO
+                    </li>
+                </random>
+            </template>
+        </category>
+
+        <category>
+            <pattern>DIGITE REINICIAR PROCESSO</pattern>
+            <template><srai>REINICIAR PROCESSO</srai></template>
+        </category>
+        <category>
+            <pattern>REINICIAR PROCESSO</pattern>
+            <that>DIGITE REINICIAR PROCESSO</that>
+            <template>
+                <think><set name="topic">RENDA</set></think>
+                <srai>INICIAR PROCESSO</srai>
+            </template>
+        </category>
+     </topic>
+</aiml>
