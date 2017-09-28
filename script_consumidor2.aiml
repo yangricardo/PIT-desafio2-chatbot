@@ -39,6 +39,7 @@
             <pattern>INICIAR PROCESSO</pattern>
             <template>
                 A sua renda mensal é até R$2.000,00?
+                 #button#Sim;Não;
             </template>
         </category>
 
@@ -90,6 +91,7 @@
             <template>
                 Você poderia enviar  algum documento que comprove essa afirmação? \n
                 Esse documento pode ser um contra cheque,  conta de luz, água, telefone, etc.
+                 #button#Sim;Não;
             </template>
         </category>
 
@@ -139,6 +141,7 @@
             <pattern>HIPOSSUFICIENCIA</pattern>
             <template>
                 Você tem outras formas de comprovar a sua hipossuficiência?
+                 #button#Sim;Não;
             </template>
         </category>
 
@@ -166,10 +169,11 @@
         <category>
             <pattern>SIM</pattern>
             <template>
-                Se você tiver outras formas de comprovar a sua hipossuficiência, procure \r
-                um núcleo de atendimento da Defensoria Pública mais próximo de você. \r
-                Clique no link abaixo para acessar os locais dos núcleos: \r
+                Se você tiver outras formas de comprovar a sua hipossuficiência, procure \n
+                um núcleo de atendimento da Defensoria Pública mais próximo de você. \n
+                Clique no link abaixo para acessar os locais dos núcleos: \n
                 http://www.defensoria.rj.def.br/Cidadao/Enderecos-para-Atendimento
+                 #button#Sim;Não;
             </template>
         </category>
 
@@ -204,6 +208,7 @@
             <pattern>COBRANCAINDEVIDA</pattern>
             <template>
                 Você possui acesso às contas relativas a cobrança indevida?
+                #button#Sim;Não;
             </template>
         </category>
 
@@ -216,7 +221,7 @@
         </category>
 
          <category>
-            <pattern>SIM</pattern>
+            <pattern>NÃO</pattern>
             <template>
                 <think><set name="topic">COMPROVANTE</set></think>
                 <srai>COMPROVANTE</srai>
@@ -254,6 +259,7 @@
             <pattern>COMPROVANTE</pattern>
             <template>
                 Você possui comprovante desse pagamento?
+                #button#Sim;Não;
             </template>
         </category>
 
@@ -304,6 +310,7 @@
             <pattern>ALEGAR</pattern>
             <template>
                Você possui outra forma de comprovar o que alega?
+               #button#Sim;Não;
             </template>
         </category>
 
